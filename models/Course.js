@@ -1,4 +1,4 @@
-const connectToDB = require('database')
+const connectToDB = require('../database')
 const mongoose = require('mongoose')
 
 
@@ -10,7 +10,7 @@ const CourseSchema = mongoose.Schema({
 		required: true
 	},
 	description: {
-		type: Text,
+		type: String,
 		required: true
 	},
 	price: {

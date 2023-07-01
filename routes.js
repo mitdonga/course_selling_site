@@ -10,7 +10,7 @@ router.get('/', function (req, res) {
 
 // For Admin
 router.post('/admin/signup', AdminController.signup);
-router.post('/admin/login', AdminController.login);
+router.post('/admin/login', UsersController.login);
 
 
 // Authenticating Admin

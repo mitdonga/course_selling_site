@@ -1,4 +1,4 @@
-const connectToDB = require('database')
+const connectToDB = require('../database')
 const mongoose = require('mongoose')
 
 

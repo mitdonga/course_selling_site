@@ -13,7 +13,7 @@ const signup = async (req, res) => {
 			await user.save()
 			res.status(200).json({ message: "Admin signed up successfully", user: user });
 		} catch (err) {
-			res.status(500).json({ error: err });
+			res.status(500).json({ error: err.message });
 		}
 	}
 }

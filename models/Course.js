@@ -27,5 +27,11 @@ const CourseSchema = mongoose.Schema({
 	}
 })
 
-module.exports = mongoose.model('Course', CourseSchema)
+CourseSchema.statics.publishedCourses = function() {
+  return this.find({ published: true })
+}
+
+const Course = mongoose.model('Course', CourseSchema)
+
+module.exports = Course
 

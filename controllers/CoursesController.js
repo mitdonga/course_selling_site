@@ -1,6 +1,7 @@
 
 const User = require('../models/User');
 const Course = require('../models/Course');
+const Purchase = require('../models/Purchase');
 
 const create = async (req, res) => {
 	const { title, description, price, imageLink, published } = req.body;
@@ -45,13 +46,28 @@ const publishedCourses = async (req, res) => {
 }
 
 const purchase = async (req, res) => {
-	console.log("Purchasing Course");
+	const courseId = req.params.courseId;
+	let purchase = new Purchase({ user: req.user._id, course: courseId })
+	try {
+		purchase = await purchase.save()
+		purchase = purchase.populate("course")
+		res.status(200).json({ message: "You successfully bought the course." })
+	} catch (err) {
+		if (err.message.includes("duplicate key error")) res.status(400).json({ error: "You already bought this course" })
+		else res.status(400).json({ error: err.message })
+	}
 }
 
 const purchasedCourses = async (req, res) => {
-	console.log("Showing Purchased Courses");
+	try {
+		const purchases = await Purchase.getPurchasedCourses(req.user)
+		const courses = purchases.map(purchase => purchase.course)
+		res.status(200).json({ message: `Found ${courses.length} courses`, count: courses.length, courses: courses })
+	} catch (error) {
+		res.status(400).json({ error: error.message })
+	}
 }
-
+	
 module.exports = {
 	create, 
 	update, 

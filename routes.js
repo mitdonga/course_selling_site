@@ -8,7 +8,7 @@ router.get('/', function (req, res) {
 	res.send("Welcome to courses selling website!");
 })
 
-// For Admin
+// For Admin Signup/Login
 router.post('/admin/signup', AdminController.signup);
 router.post('/admin/login', UsersController.login);
 
@@ -21,7 +21,7 @@ router.put('/admin/courses/:courseId', CoursesController.update);
 router.get('/admin/courses', CoursesController.index);
 
 
-// For Users
+// For Users Signup/Login
 router.post('/users/signup', UsersController.signup);
 router.post('/users/login', UsersController.login);
 
